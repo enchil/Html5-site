@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball{
+            height: 50px;
+            width: 50px;
+            background-color:rgb(255, 225, 0);
+            border-radius: 50%;
+            text-align: center;
+            cursor:pointer;
+
+        }
+        .rect{
+            position: relative;
+            left: 300px;
+            height: 200px;
+            width: 200px;
+            background-color:rgb(35, 162, 109);
+        }
+    </style>
+</head>
+<body>
+    <div class="ball" draggable="true">ball</div>
+
+    <div class="rect" draggable="true">rect</div>
+
+    <script>
+        const ball = document.querySelector('.ball');
+        const rect = document.querySelector('.rect');
+
+        const handler = event=>{
+            console.log(event.type);
+        };
+
+        rect.addEventListener('dragover', event=>event.preventDefault());
+        rect.addEventListener('dragenter', handler);
+        rect.addEventListener('dragleave',handler);
+        rect.addEventListener('drop',handler);
+
+
+    </script>
+</body>
+</html>
