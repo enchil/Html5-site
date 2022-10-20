@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="info" contenteditable="true">
+        123456
+    </div>
+
+    <script>
+        const prevData = localStorage.getItem('mycontent');
+        
+        let obj = { content: '' };//預設
+        try {
+            obj = JSON.parse(prevData) || obj;
+        } catch (error) { }
+
+        info.innerText = obj.content;
+
+        info.addEventListener('input', (event) => {
+            console.log(info.innerText);
+            const data = {
+                time: Date.now(),
+                content: info.innerText
+            };
+            localStorage.setItem('mycontent', JSON.stringify(data));
+        });
+    </script>
+</body>
+
+</html>
