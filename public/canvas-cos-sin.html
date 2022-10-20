@@ -1,12 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            overflow: hidden;
+        }
+    </style>
+    <title>title</title>
 </head>
+
 <body>
-    
+
+    <canvas id="mycanvas"></canvas>
+
+    <script>
+        // CanvasRenderingContext2D.prototype.strokeCircle = function(cx, cy, r){
+        //     this.beginPath();
+        //     this.arc(cx, cy, r, 0, Math.PI*2);
+        //     this.stroke();
+        // };
+
+        const myCanvas = document.querySelector('#mycanvas');
+        myCanvas.width = window.innerWidth;
+        myCanvas.height = window.innerHeight;
+        const cx = myCanvas.width / 2;
+        const cy = myCanvas.height / 2;
+
+        const fillCircle = function (cx, cy, r, color) {
+            const ctx = myCanvas.getContext('2d');
+            ctx.fillStyle = color || 'gray';
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.fill();
+        };
+
+
+        // ctx.strokeStyle = '#878686'; // 設定畫筆顏色
+        // ctx.lineWidth = 20;
+
+
+        const ballNum = 20;
+        const angUnit = Math.PI * 2 / ballNum;
+        let r = 300;
+        let rr = 30
+
+        for (let i = 0; i < ballNum*2; i++, r-=5, rr-=.5) {
+            const x = cx + Math.cos(i * angUnit) * r;
+            const y = cy + Math.sin(i * angUnit) * r;
+            const degree = i * angUnit / Math.PI * 180;
+            fillCircle(x, y, rr, `hsl(${degree},100%,50%)`);
+        }
+
+
+    </script>
 </body>
+
 </html>
