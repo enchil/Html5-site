@@ -6,7 +6,7 @@ const createEchoServer = server => {
         ws.on('message', message => {
             ws.send(message.toString());
         })
-        ws.send('ha');
+        ws.send('-----連線數-:' + wsServer.clients.size);
     })
 
 
