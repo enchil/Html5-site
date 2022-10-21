@@ -21,16 +21,34 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', indexRouter);
-app.use('/', serveIndex('public', {'icons':true}));
+app.use('/', serveIndex('public', { 'icons': true }));
 app.use('/users', usersRouter);
 
+app.get('/try-sse', (req, res) => {
+  let id = 30;
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream;charset=utf-8',
+    'CacheControl': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+
+  setInterval(() => {
+    const now = new Date();
+    res.write(`id:${id++}\n`)
+    res.write(`data:${now.toLocaleDateString()}\n\n`);
+  }, 2000)
+});
+
+
+
+
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
