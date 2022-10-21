@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="msg">
+        <button onclick="sendMsg()">送出</button>
+    </div>
+    <textarea id="info" cols="50" rows="30" readonly>
+
+    </textarea>
+
+    <script>
+        const mgs = document.querySelector('#msg');
+        const info = document.querySelector('#info');
+
+        let socket = new WebSocket('ws://localhost:3002');
+        socket.addEventListener('open', e => {
+            console.log('--已連線了--');
+            info.innerHTML += "--已連線了-- \n";
+
+        });
+        socket.addEventListener('message', e => {
+            info.innerHTML += e.data + "\n";
+        });
+
+        function sendMsg(){
+            socket.send(msg.value);
+            msg.value='';
+        }
+
+    </script>
+</body>
+
+</html>
