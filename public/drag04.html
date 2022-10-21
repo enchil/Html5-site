@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball {
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            background-color: rgb(255, 225, 0);
+            line-height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+
+        }
+
+        .rect {
+            display: inline-block;
+            left:0px;
+            height: 200px;
+            width: 200px;
+            background-color: rgb(35, 162, 109);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="rect">
+    </div>
+
+    <script>
+        const rect = document.querySelector('.rect');
+
+        rect.addEventListener('dragenter', e=>{
+            e.currentTarget.style.backgroundColor = 'rgb(255, 225, 0)';
+        });
+
+        rect.addEventListener('dragleave', e=>{
+            e.currentTarget.style.backgroundColor = 'rgb(35, 162, 109)';
+        });
+
+        
+        const myDragOver =event=> event.preventDefault();
+
+
+        rect.addEventListener('dragover', myDragOver);
+        rect.addEventListener('drop', 
+        event=> {event.preventDefault();
+        console.log(event.dataTransfer.files);
+        });
+       
+
+    </script>
+</body>
+
+</html>
