@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball {
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            background-color: rgb(255, 225, 0);
+            line-height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+
+        }
+
+        .rect {
+            display: inline-block;
+            left:0px;
+            height: 200px;
+            width: 200px;
+            background-color: rgb(35, 162, 109);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="rect" style="background-color: rgb(154, 235, 239);">
+        <div class="ball" draggable="true">ball1</div>
+        <div class="ball" draggable="true">ball2</div>
+        <div class="ball" draggable="true">ball3</div>
+    </div>
+
+    <div class="rect" draggable="true"  style="left: 600px;" >rect</div>
+
+    <script>
+        let dragTarget = null;//拖拉的對象
+
+        const balls = document.querySelectorAll('.ball');
+        const rects = document.querySelectorAll('.rect');
+
+        const myDragStart = event => {
+            dragTarget = event.currentTarget;
+        };
+
+        const myDragEnd = event => {
+            dragTarget = null;
+        }
+
+        balls.forEach(b => {
+            b.addEventListener('dragstart', myDragStart);
+            b.addEventListener('dragend', myDragEnd);
+        });
+
+        const myDrop = event => {
+            const rect = event.currentTarget;
+            rect.append(dragTarget);
+        }
+
+        const myDragOver =event=> event.preventDefault();
+
+        rects.forEach(r => {
+            r.addEventListener('dragover', myDragOver);
+            r.addEventListener('drop', myDrop);
+        });
+
+    </script>
+</body>
+
+</html>
