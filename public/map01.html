@@ -26,7 +26,7 @@
         // -----------------------
 
         const ar = [2,4,6,obj, obj, 6, {name:'david'}];
-        const set = new Set(ar);
+        const set = new Set(ar);//去掉重複的
         console.log(set.size);
         set.forEach((v)=>{
             console.log({v});
